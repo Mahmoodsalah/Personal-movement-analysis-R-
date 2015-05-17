@@ -1,18 +1,29 @@
 ---
 title: "Reproducible Research: Peer Assessment 1"
-output: 
-  html_document:
-    keep_md: true
+output:
+html_document:
+keep_md: true
 ---
 
 
 ## Loading and preprocessing the data
 
 
+2. Process/transform the data into a format suitable for the analysis.
+```{r load}
+data <- read.csv('activity.csv')
+data$date <- as.Date(data$date,"%Y-%m-%d")
+
+```
+
 
 ## What is mean total number of steps taken per day?
-
-
+1.The total number of steps taken per day 
+``` {r stepsPerDay}
+data$steps <- ifelse(is.na(data$steps)==TRUE,0,data$steps)  
+ssum <- aggregate(steps~date,data,sum)
+ssum
+```
 
 ## What is the average daily activity pattern?
 
